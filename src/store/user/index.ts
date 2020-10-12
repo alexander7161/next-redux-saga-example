@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { HYDRATE } from "next-redux-wrapper";
 
 const initialState: {
   error: Error | null;
@@ -20,6 +21,9 @@ const userSlice = createSlice({
       state.error = action.payload;
     },
     signOut() {},
+  },
+  extraReducers: {
+    [HYDRATE]: (state, action) => ({ ...state, ...action.payload.user }),
   },
 });
 // Extract the action creators object and the reducer
